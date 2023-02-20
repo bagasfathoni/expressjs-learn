@@ -16,6 +16,8 @@ app.use(
 // Init created router
 const customerRouter = require('./routes/customer');
 app.use('/api/customer', customerRouter);
+const productRouter = require('./routes/product');
+app.use('/api/product', productRouter);
 
 // Run ExpressJS app
 app.listen(8080, () => {

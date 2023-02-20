@@ -44,6 +44,7 @@ const getCustomerColumnValue = keys => {
 				res.push({'key': 'email', 'value': keys['email']});
 				continue;
 			default:
+				continue;
 		}
 	}
 	return res;
