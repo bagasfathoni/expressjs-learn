@@ -18,6 +18,8 @@ const customerRouter = require('./routes/customer');
 app.use('/api/customer', customerRouter);
 const productRouter = require('./routes/product');
 app.use('/api/product', productRouter);
+const trxRouter = require('./routes/trx');
+app.use('/api/trx', trxRouter);
 
 // Run ExpressJS app
 app.listen(8080, () => {

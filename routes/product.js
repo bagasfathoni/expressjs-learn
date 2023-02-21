@@ -14,9 +14,9 @@ const productController = new ProductController();
 router.get('/', productController.getAllProducts);
 
 /* GET product by matching value */
-router.route('/search').get(productController.searchMatchingProducts);
+router.get('/search', productController.searchMatchingProducts);
 
-/* INSERT one customer */
+/* INSERT one product*/
 // router.route('/insert_one_customer').post(productController.insertOneCustomer);
 
 module.exports = router;

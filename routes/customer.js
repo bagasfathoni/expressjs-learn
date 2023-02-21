@@ -14,9 +14,9 @@ const customerController = new CustomerController();
 router.get('/', customerController.getAllCustomers);
 
 /* GET customer by matching value */
-router.route('/search').get(customerController.searchMatchingCustomer);
+router.get('/search', customerController.searchMatchingCustomer);
 
 /* INSERT one customer */
-router.route('/insert_one_customer').post(customerController.insertOneCustomer);
+router.post('/insert_one_customer', customerController.insertOneCustomer);
 
 module.exports = router;

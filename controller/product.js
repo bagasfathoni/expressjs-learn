@@ -9,15 +9,6 @@ class ProductController {
 		this.dtoRequest = new DtoRequest();
 	}
 
-	// insertOneCustomer = (req, res) => {
-	// 	this.productModel.insertOneCustomer(
-	// 		(err, data) => {
-	// 			err ? this.dtoResponse.generic500Response(res, err.message) : this.dtoResponse.generic200Response(res, 'Insert One Customer SUCCESS', data);
-	// 		},
-	// 		{'name': req.body.name, 'email': req.body.email}
-	// 	);
-	// };
-
 	getAllProducts = (req, res) => {
 		this.productModel.getAllProducts((err, data) => {
 			err ? this.dtoResponse.generic500Response(res, err.message) : this.dtoResponse.generic200Response(res, 'Get All Products SUCCESS', data);
@@ -38,10 +29,30 @@ const getProductColumnValue = keys => {
 	for (const key in keys) {
 		switch (key) {
 			case 'product_id':
-				res.push({'key': 'product_id', 'value': keys['product_id']});
+				if (keys['product_id'] instanceof Array) {
+					const vals = [];
+					for (const v of keys['product_id']) {
+						let val = {'value': v};
+						vals.push(val);
+						res.push({'key': 'product_id', 'values': vals});
+					}
+				} else {
+					let val = {'value': keys['product_id']};
+					res.push({'key': 'product_id', 'values': [val]});
+				}
 				continue;
-			case 'name':
-				res.push({'key': 'product_name', 'value': keys['name']});
+			case 'product_name':
+				if (keys['product_name'] instanceof Array) {
+					const vals = [];
+					for (const v of keys['product_name']) {
+						let val = {'value': v};
+						vals.push(val);
+						res.push({'key': 'product_name', 'values': vals});
+					}
+				} else {
+					let val = {'value': keys['product_name']};
+					res.push({'key': 'product_name', 'values': [val]});
+				}
 				continue;
 			default:
 				continue;

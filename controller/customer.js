@@ -37,11 +37,31 @@ const getCustomerColumnValue = keys => {
 	const res = [];
 	for (const key in keys) {
 		switch (key) {
-			case 'name':
-				res.push({'key': 'customer_name', 'value': keys['name']});
-				continue;
 			case 'email':
-				res.push({'key': 'email', 'value': keys['email']});
+				if (keys['email'] instanceof Array) {
+					const vals = [];
+					for (const v of keys['email']) {
+						let val = {'value': v};
+						vals.push(val);
+						res.push({'key': 'email', 'values': vals});
+					}
+				} else {
+					let val = {'value': keys['email']};
+					res.push({'key': 'email', 'values': [val]});
+				}
+				continue;
+			case 'name':
+				if (keys['name'] instanceof Array) {
+					const vals = [];
+					for (const v of keys['name']) {
+						let val = {'value': v};
+						vals.push(val);
+						res.push({'key': 'name', 'values': vals});
+					}
+				} else {
+					let val = {'value': keys['name']};
+					res.push({'key': 'customer_name', 'values': [val]});
+				}
 				continue;
 			default:
 				continue;
