@@ -1,0 +1,357 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "ABC Store API Docs",
+    "description": "Simple CRUD API application"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    },
+    {
+      "url": "https://localhost:8080"
+    }
+  ],
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Customer",
+      "description": "Customer API"
+    },
+    {
+      "name": "Product",
+      "description": "Product API"
+    },
+    {
+      "name": "Trx",
+      "description": "Trx API"
+    }
+  ],
+  "paths": {
+    "/api/customer/": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "List all customers",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/BaseResponse",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Customers"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/customer/search": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Get customer using matching email, name, etc.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/BaseResponse",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Customers"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/customer/insert_one_customer": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Insert one customer",
+        "description": "",
+        "parameters": [
+          {
+            "name": "",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "heru widianto"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "heru.widianto@mail.com"
+                }
+              },
+              "required": [
+                "name",
+                "email"
+              ]
+            },
+            "required": [
+              "name",
+              "email"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/BaseResponse",
+                  "properties": {
+                    "data": {
+                      "type": "integer",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/product/": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "List all products",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/BaseResponse",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Products"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/product/search": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get product using matching id, name, etc.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "product_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/BaseResponse",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Products"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/trx/generate_one_trx": {
+      "post": {
+        "tags": [
+          "Trx"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customer_id": {
+                  "type": "string",
+                  "example": "26c9483e69e7411282501c038c607101"
+                },
+                "order": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product_id": {
+                        "type": "string",
+                        "example": "d835aef63441456bb25722fecb3e26a4"
+                      },
+                      "qty": {
+                        "type": "number",
+                        "example": 4
+                      }
+                    },
+                    "required": [
+                      "product_id",
+                      "qty"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "customer_id",
+                "order"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BaseResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "OK"
+          },
+          "message": {
+            "type": "string",
+            "example": "Get SUCCESS"
+          }
+        }
+      },
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "customer_id": {
+            "type": "string",
+            "example": "b7977d77e62549ffb6521005970d3fbb"
+          },
+          "customer_name": {
+            "type": "string",
+            "example": "AGUS SUYONO"
+          },
+          "email": {
+            "type": "string",
+            "example": "agus.suyono@mail.com"
+          },
+          "is_active": {
+            "type": "number",
+            "example": 1
+          }
+        }
+      },
+      "Customers": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Customer"
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "product_id": {
+            "type": "string",
+            "example": "b4838994b62240bf92de2dd7e3d56123"
+          },
+          "product_name": {
+            "type": "string",
+            "example": "MEJA KAYU"
+          },
+          "price": {
+            "type": "number",
+            "example": 10000
+          },
+          "is_active": {
+            "type": "number",
+            "example": 1
+          }
+        }
+      },
+      "Products": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Product"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+	"name": "abc-store",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"start": "node app.js",
+		"swagger-gen": "node config.js"
+	},
+	"dependencies": {
+		"body-parser": "^1.20.1",
+		"cookie-parser": "~1.4.4",
+		"debug": "~2.6.9",
+		"express": "~4.16.1",
+		"morgan": "~1.9.1",
+		"mysql": "^2.18.1",
+		"open": "^8.4.2",
+		"swagger-ui-express": "^4.6.1",
+		"uuid": "^9.0.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.20",
+		"swagger-autogen": "^2.23.1"
+	}
+}
