@@ -1,4 +1,4 @@
-const db = require('../config');
+const {mysqlConn: db} = require('../config');
 class TrxModel {
 	createTrx = (trxResult, args) => {
 		db.beginTransaction(err => {

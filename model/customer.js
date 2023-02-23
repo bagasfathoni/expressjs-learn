@@ -1,4 +1,4 @@
-const db = require('../config');
+const {mysqlConn: db} = require('../config');
 const {generateUuid} = require('../utils/misc');
 
 class CustomerModel {

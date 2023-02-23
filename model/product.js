@@ -1,4 +1,4 @@
-const db = require('../config');
+const {mysqlConn: db} = require('../config');
 
 class ProductModel {
 	insertOneProduct = (sqlResult, args) => {};

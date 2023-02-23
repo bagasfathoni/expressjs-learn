@@ -1,8 +1,7 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const open = require('open');
 
 // Init ExpressJS config
 const app = express();
@@ -14,16 +13,14 @@ app.use(
 );
 
 // Init created router
-const customerRouter = require('./routes/customer');
-app.use('/api/customer', customerRouter);
-const productRouter = require('./routes/product');
-app.use('/api/product', productRouter);
-const trxRouter = require('./routes/trx');
-app.use('/api/trx', trxRouter);
+app.use('/api/customer', require('./routes/customer'));
+app.use('/api/product', require('./routes/product'));
+app.use('/api/trx', require('./routes/trx'));
 
 // Run ExpressJS app
+const {swaggerConfig} = require('./config');
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerConfig)));
 app.listen(8080, () => {
+	// open('http://localhost:8080/docs');
 	console.log('running server on :8080');
 });
-
-module.exports = app;
