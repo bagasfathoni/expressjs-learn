@@ -20,6 +20,6 @@ app.use('/api/trx', require('./routes/trx'));
 // Run ExpressJS app
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.listen(8080, () => {
-	// open('http://localhost:8080/docs');
+	open('http://localhost:8080/docs');
 	console.log('running server on :8080');
 });
