@@ -1,6 +1,6 @@
 const express = require('express');
-const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger_output.json');
 const open = require('open');
 
 // Init ExpressJS config
@@ -18,8 +18,7 @@ app.use('/api/product', require('./routes/product'));
 app.use('/api/trx', require('./routes/trx'));
 
 // Run ExpressJS app
-const {swaggerConfig} = require('./config');
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerConfig)));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.listen(8080, () => {
 	// open('http://localhost:8080/docs');
 	console.log('running server on :8080');

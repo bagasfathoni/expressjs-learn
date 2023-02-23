@@ -1,23 +1,3 @@
-/**
- * @swagger
- * components:
- *   schemas:
- *     BaseResponse:
- *       type: object
- *       properties:
- *         status:
- *           type: string
- *         message:
- *           type: string
- *       additionalProperties: true
- *       example:
- *         status: OK
- *         message: SUCCESS
- *
- *
- *
- *
- */
 class DtoResponse {
 	generic200Response = (resp, message, data) => {
 		resp.status(200).send({

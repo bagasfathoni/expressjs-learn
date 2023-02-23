@@ -1,5 +1,7 @@
 const mysql = require('mysql');
 const appConfig = require('./app_config.json');
+const swaggerDocs = require('./swagger');
+const swaggerAutogen = require('swagger-autogen')({openapi: '3.0.0'});
 
 // MySQL Config
 const mysqlConn = mysql.createConnection({
@@ -11,25 +13,9 @@ const mysqlConn = mysql.createConnection({
 	ssl: appConfig.mysql.ssl,
 });
 
-const swaggerConfig = {
-	definition: {
-		openapi: '3.0.0',
-		info: {
-			title: 'ABC Store API Docs',
-			version: '0.1.0',
-			description: 'This is a simple CRUD API application made with Express and documented with Swagger',
-			license: {
-				name: 'MIT',
-				url: 'https://spdx.org/licenses/MIT.html',
-			},
-		},
-		servers: [
-			{
-				url: 'http://localhost:8080',
-			},
-		],
-	},
-	apis: ['./routes/*.js', './dto/*.js'],
-};
+// Swagger config starts here
+const outputFile = './swagger_output.json';
+const endpointsFiles = ['./app.js'];
 
-module.exports = {mysqlConn, swaggerConfig};
+swaggerAutogen(outputFile, endpointsFiles, swaggerDocs);
+module.exports = {mysqlConn, swaggerAutogen};
